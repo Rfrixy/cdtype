@@ -108,7 +108,7 @@ html {
   font-weight: 700;
   font-size: 10px;
   vertical-align: sub;
-  margin-right: 25px;
+  margin-right: 45px;
 }
 
 #rcorners {
@@ -125,6 +125,6 @@ html {
   color: #979cb0;
   display: inline-block;
   font-size: 10px;
-  position: absolute;
-  right:auto;
+  float:right;
+  text-align: right;
 }
