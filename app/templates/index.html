@@ -14,7 +14,6 @@
       {% for score in scores %}
       <li>
         <div class="name">
-          <!-- <span class="dept">{{score.dept}} team</span> -->
           <span class="stat">{{ (score.speed | string)[:-2] }}</span>
           <span class="sub"> wpm</span>
           <span class="rank" id="rcorners">{{loop.index}}</span>
@@ -27,4 +26,40 @@
     </ul>
   </div>
 </div>
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+
+<!-- <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script> -->
+
+<link href='https://fonts.googleapis.com/css?family=Cutive+Mono|Roboto:400,900,700' rel='stylesheet' type='text/css'/>
+<!-- <p id="focus">Click this window to give it focus (Start typing with a capital S!)</p> -->
+
+<div id="typewrapper">
+  <h3 id="output"></h3>
+  <div class="target mono" id="target"></div>
+  <div id="your-attempt" class="mono your-attempt" placeholder="Your text will appear here"></div>
+  <!-- <p class="twitter">Tweet your highest words per minute @ us! <a href="https://twitter.com/EightArmsHQ" target="_blank">https://twitter.com/EightArmsHQ</a></p> -->
+
+  <div class="results">
+    <ul class="stats">
+      <li>Words per minute <span id="wpm">0</span></li>
+      <li>Wordcount <span id="wordcount">0</span></li>
+      <li>Timer <span id="timer">0</span></li>
+      <li>Errors <span id="errors">0</span></li>
+    </ul>
+  </div>
+  <hr style="clear:both;" />
+  <div>
+  <textarea name="" id="input_text" cols="30" rows="10">{{text}}</textarea>
+  <!-- <textarea name="" id="input_text" cols="30" rows="10">where</textarea> -->
+  </div>
+  <div class="settings">
+    <span>The leaderboard does not automatically update! </span>
+    <span style="float:right;">Ping divesh.naidu@collegedunia.com if you want your score on the leaderboard. </span>
+    <!-- <a href="#" id="reset">Reset</a> | <a href="#" id="change">Change text</a> | <a href="#" id="pause">Pause II</a> -->
+  </div>
+</div>
+
+<script src="{{url_for('static', filename='typing.js')}}"></script>
+
+
 {% endblock %}

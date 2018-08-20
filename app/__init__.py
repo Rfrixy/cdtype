@@ -1,3 +1,4 @@
+import random
 from flask import Flask
 from pymongo import MongoClient
 import os
@@ -13,6 +14,8 @@ def create_app(database_uri=None, debug=True):
     client = MongoClient("mongodb://divesh:divesh123@ds123012.mlab.com:23012/typetest",connectTimeoutMS=30000, socketTimeoutMS=None, socketKeepAlive=True, connect=False, maxPoolsize=1)
     db = client.typetest
     speed_results = db.scores
+    # var r = Math.floor(Math.random() * n);
+    # var randomElement = db.myCollection.find(query).limit(1).skip(r);
     try:
         os.makedirs(app.instance_path)
     except OSError:
@@ -20,8 +23,13 @@ def create_app(database_uri=None, debug=True):
 
     @app.route('/')
     def hello():
+        texts = db.texts.find();
+        textlist = list(texts)
+        chosen_text = random.choice(textlist)['text']
+        print (chosen_text)
         return render_template("index.html",
-            scores= sorted(list(speed_results.find()), key=lambda x : x['speed'],reverse=True))
+            scores= sorted(list(speed_results.find()), key=lambda x : x['speed'],reverse=True),
+            text = chosen_text)
 
     return app
 
