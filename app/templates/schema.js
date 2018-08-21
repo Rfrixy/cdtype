@@ -21,6 +21,19 @@ db.scores.insert({name:'Jayant Pratap', email:'Jayant.Pratap@collegedunia.com', 
 
 
 
+db.scores.insert({name:'Rexy Joseph', email:'rexy.joseph@collegedunia.com', speed:52, achieved_on: new Date(),dept:"Tech"})
+db.scores.insert({name:'Akanksha Singh', email:'akanksha@collegedunia.com', speed:53, achieved_on: new Date(),dept:"Email"})
+db.scores.insert({name:'Atul Kumar', email:'atul.kumar@collegedunia.com', speed:25, achieved_on: new Date(),dept:"Tech"})
+db.scores.insert({name:'Gauren Bhardwaj', email:'gauren.bhardwaj@collegedunia.com', speed:45, achieved_on: new Date(),dept:"Product"})
+db.scores.insert({name:'Sakshi Sharma', email:'sakshi.sharma@collegedunia.com', speed:46, achieved_on: new Date(),dept:"Mobile"})
+db.scores.insert({name:'Sudhansh Jayant', email:'sudhansh.jayant@collegedunia.com', speed:73, achieved_on: new Date(),dept:"Mobile"})
+db.scores.insert({name:'Urvi Setia', email:'urvi.setia@3dot14.co', speed:31, achieved_on: new Date(),dept:"Mobile"})
+db.scores.insert({name:'Chandrakant', email:'chandrakant.j@collegedunia.com', speed:47, achieved_on: new Date(),dept:"SEO"})
+db.scores.insert({name:'Rishabh Thakur', email:'rishabh.thakur@3dot14.co', speed:53, achieved_on: new Date(),dept:"Graphic"})
+db.scores.insert({name:'Aneesh Uppal', email:'aneesh.uppal@collegedunia.com', speed:78, achieved_on: new Date(),dept:"Product"})
+
+
+
 db.scores.update({name:'Divesh Naidu'}, {$set:{speed:a a a, achieved_on: new Date()}})
 
 
