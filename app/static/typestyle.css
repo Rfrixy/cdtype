@@ -203,6 +203,19 @@ textarea {
   color: #ccf;
 }
 
+
+@keyframes flashred {
+    0% {background-color: white;}
+    30% {background-color: #c0392b;}
+    100% {background-color: #fefefe;}
+}
+
+
+.mistake{
+  animation-name: flashred;
+  animation-duration: 0.5s;
+}
+
 .twitter a {
   color: rgba(255, 0, 0, 0.7);
   text-decoration: none;

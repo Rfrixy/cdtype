@@ -31,10 +31,15 @@ db.scores.insert({name:'Urvi Setia', email:'urvi.setia@3dot14.co', speed:31, ach
 db.scores.insert({name:'Chandrakant', email:'chandrakant.j@collegedunia.com', speed:47, achieved_on: new Date(),dept:"SEO"})
 db.scores.insert({name:'Rishabh Thakur', email:'rishabh.thakur@3dot14.co', speed:53, achieved_on: new Date(),dept:"Graphic"})
 db.scores.insert({name:'Aneesh Uppal', email:'aneesh.uppal@collegedunia.com', speed:78, achieved_on: new Date(),dept:"Product"})
+db.scores.insert({name:'Anamika Mahajan', email:'anamika.mahajan@collegedunia.com', speed:19, achieved_on: new Date(),dept:"Content"})
 
 
 
-db.scores.update({name:'Divesh Naidu'}, {$set:{speed:a a a, achieved_on: new Date()}})
+db.scores.update({name:'Divesh Naidu'}, {$set:{speed:85, achieved_on: new Date()}})
+db.scores.update({name:'Aneesh Uppal'}, {$set:{speed:85, achieved_on: new Date()}})
+
+db.scores.update({name:'Raviranjan Singh'}, {$set:{speed:66, achieved_on: new Date()}})
+db.scores.update({name:'Raviranjan Singh'}, {$set:{speed:66, achieved_on: new Date()}})
 
 
 db.scores.update({name:'Divesh Naidu'}, {$set:{dept:"Tech"}})

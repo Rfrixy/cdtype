@@ -85,6 +85,11 @@ $(window).keypress(function(evt){
       finished();
     }
   }else{
+		element = $("#typewrapper")
+		element.removeClass("mistake")
+		setTimeout(function () {
+				element.addClass("mistake")
+			}, 01);
     $("#your-attempt").append("<span class='wrong'>" + charTyped + "</span>");
     errors ++;
     $("#errors").text(errors);
