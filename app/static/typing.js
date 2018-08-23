@@ -154,6 +154,15 @@ function reset(){
 }
 
 function finished(){
+
+	$.post("/postscore",
+	{
+			speed: wpm,
+	},
+	function(data, status){
+			console.log("Data: " + data + "\nStatus: " + status);
+	});
+
   alert("Congratulations!\nWords per minute: " + wpm + "\nWordcount: " + wordcount + "\nErrors:" + errors);
 }
 

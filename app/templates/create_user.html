@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+input[type=text], select,[type=email],[type=password],[type=number] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type=submit] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: #45a049;
+}
+
+div {
+    border-radius: 5px;
+    padding: 20px;
+    width:100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+form{
+  width: 30%;
+  padding-bottom: 25vh;
+}
+html {
+    height: 100%;
+}
+
+</style>
+
+
+<!-- <h3>Using CSS to style an HTML Form</h3> -->
+
+<div>
+  <form action="/" method="post">
+    <label for="fname">Name</label>
+    <input type="text" id="name" name="name" placeholder="Your name" required>
+
+    <label for="email">Email Address</label>
+    <input type="email" id="email" name="email" placeholder="Your email id" required>
+
+    <label for="speed">Speed</label>
+    <input type="number" id="speed" name="speed" placeholder="WPM">
+
+    <label for="pwd">Key</label>
+    <input type="password" id="pwd" name="pwd" placeholder="Admin pass" required>
+
+    <label for="dept">Team</label>
+    <select id="team" name="team" required>
+      <option value="Tech">Tech</option>
+      <option value="Content">Content</option>
+      <option value="Client">Client</option>
+      <option value="Sales">Sales</option>
+      <option value="Mail">Mail</option>
+      <option value="Mobile">Mobile</option>
+      <option value="Admin">Admin</option>
+      <option value="Operations">Operations</option>
+      <option value="Product">Product</option>
+      <option value="Graphic">Graphic</option>
+      <option value="SEO">SEO</option>
+      <option value="HR">HR</option>
+    </select>
+
+    <input type="submit" value="Submit">
+  </form>
+</div>
+
+
+{% endblock %}
