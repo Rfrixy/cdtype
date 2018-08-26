@@ -9,13 +9,49 @@
       <p>Collegedunia<span>typing leaderboard</span></p>
     </div>
   </div>
+
+  <!-- <div>
+    <form class="inputs">
+      <label for="dept">Type</label>
+      <select id="team" name="team" required>
+        <option value="Speed">Speed</option>
+        <option value="Races">Races</option>
+      </select>
+      <label for="dept">Team</label>
+      <select id="team" name="team" required>
+        <option value="Tech" selected>All</option>
+        <option value="Tech">Tech</option>
+        <option value="Content">Content</option>
+        <option value="Client">Client</option>
+        <option value="Sales">Sales</option>
+        <option value="Mail">Mail</option>
+        <option value="Mobile">Mobile</option>
+        <option value="Admin">Admin</option>
+        <option value="Operations">Operations</option>
+        <option value="Product">Product</option>
+        <option value="Graphic">Graphic</option>
+        <option value="SEO">SEO</option>
+        <option value="HR">HR</option>
+      </select>
+      <label for="dept">Dept</label>
+      <select id="dept" name="dept" required>
+        <option value="Tech" selected>All</option>
+        <option value="Collegedunia">Collegedunia</option>
+        <option value="3dot14">3dot14</option>
+        <option value="Zoutons">Zoutons</option>
+      </select>
+    </form>
+  </div> -->
+
   <div class="wrapper__content">
     <ul>
       {% for score in scores %}
       <li>
         <div class="name">
-          <span class="stat">{{ (score.speed | string)[:-2] }}</span>
-          <span class="sub"> wpm</span>
+          <span class="speed">
+            <span class="stat">{{ (score.speed | string)[:-2] }}</span>
+            <span class="sub"> wpm</span>
+          </span>
           <span class="rank" id="rcorners">{{loop.index}}</span>
           <span class="header">{{score.name}}</span>
           <span class="date">{{ score['achieved_on'].strftime('%d-%m-%Y') }} <br>{{score.dept}} team</span>
@@ -26,7 +62,6 @@
     </ul>
   </div>
 </div>
-<script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
 
 <!-- <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script> -->
 
@@ -37,7 +72,6 @@
   <h3 id="output"></h3>
   <div class="target mono" id="target"></div>
   <div id="your-attempt" class="mono your-attempt" placeholder="Your text will appear here"></div>
-  <!-- <p class="twitter">Tweet your highest words per minute @ us! <a href="https://twitter.com/EightArmsHQ" target="_blank">https://twitter.com/EightArmsHQ</a></p> -->
 
   <div class="results">
     <ul class="stats">
@@ -50,11 +84,10 @@
   <hr style="clear:both;" />
   <div>
   <textarea name="" id="input_text" cols="30" rows="10">{{text}}</textarea>
-  <!-- <textarea name="" id="input_text" cols="30" rows="10">where</textarea> -->
   </div>
   <div class="settings">
     <span>{{ 'The leaderboard will update automatically!' if mailid else 'The leaderboard does not automatically update!' }} </span>
-    <span style="float:right;">{{ 'Currently logged in as '+mailid if mailid else 'Ping divesh.naidu@collegedunia.com if you want your score on the leaderboard.' }} </span>
+    <span style="float:right;">{{ 'Currently logged in as '+mailid if mailid else 'Sign up or Login if you want your score on the leaderboard.' }} </span>
     <!-- <a href="#" id="reset">Reset</a> | <a href="#" id="change">Change text</a> | <a href="#" id="pause">Pause II</a> -->
   </div>
 </div>

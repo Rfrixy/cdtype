@@ -145,7 +145,8 @@ span.speed{
   color: #35d8ac;
   font-weight: 700;
   font-size: 25px;
-  margin-left: 15px;
+  /* margin-left: 15px; */
+  min-width: 30px;
 
 }
 
@@ -154,7 +155,7 @@ span.speed{
   font-weight: 700;
   font-size: 10px;
   vertical-align: sub;
-  margin-right: 45px;
+  /* margin-right: 45px; */
 }
 
 #rcorners {

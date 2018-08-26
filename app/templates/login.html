@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='input.css') }}">
+
+<!-- <h3>Using CSS to style an HTML Form</h3> -->
+
+
+<div class="formwrapper">
+  <form action="/login" method="post">
+
+    <label for="email">Email Address</label>
+    <input type="email" id="email" name="email" placeholder="Your email id" required>
+    {% if error %}
+      <section class="error">Email not found. Please sign up!</section>
+    {% elif success %}
+      <span> An email has been sent to the email id. Please log in through the email</span>
+    {% endif %}
+    <input type="submit" value="Submit">
+  </form>
+</div>
+
+
+{% endblock %}
