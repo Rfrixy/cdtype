@@ -38,6 +38,7 @@ def create_app(database_uri=None, debug=True):
         pass
 
     def sendLoginMail(mailid):
+        mailid=mailid.lower()
         with app.app_context():
             pwdlink = "cdtype.herokuapp.com/?user=%s&hash=%s"%(mailid,generate_password_hash(mailid[::-1]))
             msg = Message(subject="CDTYPE login details",
@@ -60,6 +61,7 @@ def create_app(database_uri=None, debug=True):
         return 'false'
 
     def get_user(email):
+        email=email.lower()
         user = list(db.scores.find({'email':email}))
         if len(user)!=1:
             error = 'no user found'
@@ -68,6 +70,7 @@ def create_app(database_uri=None, debug=True):
         return user[0]
 
     def check_and_update_speed(email,speed):
+        email=email.lower()
         try:
             speed = float(speed)
         except:
@@ -98,6 +101,7 @@ def create_app(database_uri=None, debug=True):
             mail= request.form.get('email')
             print ( mail, 'm')
             if mail:
+                mail=mail.lower()
                 l = list(db.scores.find({'email':mail}))
                 if len(l) > 0:
                     print(mail,'mf')
@@ -111,10 +115,12 @@ def create_app(database_uri=None, debug=True):
     @app.route('/signup', methods=('GET', 'POST'))
     def signup():
         if request.method == 'POST':
+            #try except here
             name = request.form.get('name')
             email = request.form.get('email')
             dept = request.form.get('team')
             print(email, "mila")
+            email=email.lower()
             user = get_user(email)
             if user:
                 return render_template("sign_up.html",text= True, duplicate=True)
@@ -133,7 +139,7 @@ def create_app(database_uri=None, debug=True):
         if request.method == 'POST':
             if(request.form.get('pwd')=='cordova'):
                 username = request.form['name']
-                email = request.form['email']
+                email = request.form['email'].lower()
                 dept = request.form['team']
                 speed = float(request.form.get('speed',0))
                 user = get_user(email)
