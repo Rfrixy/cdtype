@@ -28,9 +28,6 @@ html {
   max-width: 600px;
   vertical-align: middle;
   margin: 22px;
-  /* margin-right: 50px; */
-  /* margin-left: 0px; */
-  /* max-height: 60vh; */
 }
 
 .inputs{
@@ -134,6 +131,7 @@ html {
   max-width: 50px;
   overflow: hidden;
   text-overflow: clip;
+  text-transform: capitalize;
 }
 
 span.speed{
