@@ -91,10 +91,10 @@ function type(input, target, current, time, random){
 
 var character_length = 31;
 var index = 0;
-var letters =  $("#input_text").val();
+var letters =  $("#type_text").val();
 var started = false;
 var current_string = letters.substring(index, index + character_length);
-
+var start_time;
 var wordcount = 0;
 
 $("html, body").click(function(){
@@ -118,7 +118,7 @@ $(window).keypress(function(evt){
       wordcount ++;
       $("#wordcount").text(wordcount);
     }
-    all_keys.push(charTyped,timer);
+    all_keys.push(charTyped, new Date().getTime() - start_time );
     index ++;
     current_string = letters.substring(index, index + character_length);
     $("#target").text(current_string);
@@ -141,7 +141,7 @@ $(window).keypress(function(evt){
 		element.removeClass("mistake")
 		setTimeout(function () {
 				element.addClass("mistake")
-			}, 01);
+			}, 1);
     $("#your-attempt").append("<span class='wrong'>" + charTyped + "</span>");
     errors ++;
     $("#errors").text(errors);
@@ -161,18 +161,19 @@ $("#reset").click(function(){
 });
 
 $("#change").click(function(){
-  $("#input_text").show().focus();
+  $("#type_text").show().focus();
 });
 
 $("#pause").click(function(){
   stop();
 });
 
-$("#input_text").change(function(){
+$("#type_text").change(function(){
   reset();
 });
 
 function start(){
+  start_time= new Date().getTime();
   interval_timer = setInterval(function(){
     timer +=0.1;
     timer = Math.round(timer*100)/100;
@@ -193,13 +194,13 @@ function stop(){
 
 function reset(){
   location.reload(true);
-  // $("#input_text").blur().hide();;
+  // $("#type_text").blur().hide();;
   // $("#your-attempt").text("");
   // index = 0;
   // errors = 0;
   // clearInterval(interval_timer);
   // started = false;
-  // letters = $("#input_text").val();
+  // letters = $("#type_text").val();
   // $("#wpm").text("0");
   // $("#timer").text("0");
   // $("#wordcount").text("0");
@@ -211,16 +212,39 @@ function reset(){
 
 function finished(){
 
-	$.post("/postscore",
-	{
-			speed: wpm,
-      hash: encryptStringWithXORtoHex(wpm.toString().repeat(10),'secretkeeeeey'),
-      all_keys:all_keys,
-      wpm_history:wpm_list
-	},
-	function(data, status){
-			console.log("Data: " + data + "\nStatus: " + status);
-	});
+
+  var data = 	{
+  			speed: wpm,
+        hash: encryptStringWithXORtoHex(wpm.toString().repeat(10),'secretkeeeeey'),
+        all_keys:all_keys,
+        wpm_history:wpm_list,
+        errors:errors
+  	};
+
+  $.ajax({
+      type: 'POST',
+      contentType: 'application/json',
+      url: '/postscore',
+      dataType : 'json',
+      data : JSON.stringify(data),
+      success : function(result) {
+        console.log(result);
+      },error : function(result){
+         console.log(result);
+      }
+  });
+
+	// $.post("/postscore",
+	// {
+	// 		speed: wpm,
+  //     hash: encryptStringWithXORtoHex(wpm.toString().repeat(10),'secretkeeeeey'),
+  //     all_keys:all_keys,
+  //     wpm_history:wpm_list,
+  //     errors:errors
+	// },
+	// function(data, status){
+	// 		console.log("Data: " + data + "\nStatus: " + status);
+	// });
 
   alert("Congratulations!\nWords per minute: " + wpm + "\nWordcount: " + wordcount + "\nErrors:" + errors);
 }

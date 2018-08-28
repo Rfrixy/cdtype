@@ -49,25 +49,6 @@ def create_app(database_uri=None, debug=True):
             mail.send(msg)
 
 
-    @app.route('/createuser')
-    def create_user():
-        return render_template('create_user.html')
-
-    @app.route('/postscore',methods=['POST'])
-    def post_score():
-        mailid = session.get('user_mail')
-        if (mailid):
-            try:
-                d = request.form
-                hash = decryptStringWithXORFromHex(d['hash'],'secretkeeeeey')
-                speed = int(hash[:len(hash)//10])
-                if speed > 160:
-                    return 'false'
-                check_and_update_speed(mailid,speed)
-            except:
-                return 'false'
-        return 'false'
-
     def get_user(email):
         email=email.lower()
         user = list(db.scores.find({'email':email}))
@@ -77,7 +58,7 @@ def create_app(database_uri=None, debug=True):
         print ('found ', user)
         return user[0]
 
-    def check_and_update_speed(email,speed):
+    def check_and_update_speed(email,speed,timing=[],stddev=0):
         email=email.lower()
         try:
             speed = float(speed)
@@ -89,11 +70,51 @@ def create_app(database_uri=None, debug=True):
         except:
             old_speed = 0.0
 
+        db.scores.update({'email':email},{'$push':{ 'history':{ 'speed':speed,'achieved_on': datetime.datetime.now(), 'stddev':stddev}}})
         print ('found speed', old_speed)
         print('new speed', speed)
         if speed > old_speed:
             db.scores.update({'email':email},{'$set':{'speed':speed,'achieved_on': datetime.datetime.now()}})
 
+    def decryptStringWithXORFromHex( input, key):
+        while (len(key) < len(input)/2):
+            key += key;
+        c = ""
+        for i in range(0,len(input),2):
+            hexValueString = input[i:i+2]
+            value1 = int(hexValueString, 16);
+            value2 = ord(key[i//2]);
+            xorValue = value1 ^ value2;
+            c += chr(xorValue);
+
+        return (str(c))
+
+
+    @app.route('/createuser')
+    def create_user():
+        return render_template('create_user.html')
+
+    @app.route('/postscore',methods=['POST'])
+    def post_score():
+        mailid = session.get('user_mail')
+
+        if (mailid):
+            try:
+            # if 2:
+                d = request.get_json()
+                print(d)
+                hash = decryptStringWithXORFromHex(d['hash'],'secretkeeeeey')
+                speed = int(hash[:len(hash)//10])
+                if speed > 160:
+                    return 'false'
+                from . import parser
+                res = parser.process_list(d['all_keys'])
+                assert(res[0])
+                check_and_update_speed(mailid,res[1],res[2],res[3])
+                return 'true'
+            except:
+                return 'false'
+        return 'false'
 
     @app.route('/profile')
     def profile():
@@ -142,22 +163,6 @@ def create_app(database_uri=None, debug=True):
 
         return render_template("sign_up.html")
 
-
-    def decryptStringWithXORFromHex( input, key):
-        while (len(key) < len(input)/2):
-            key += key;
-
-        c = ""
-        for i in range(0,len(input),2):
-            hexValueString = input[i:i+2]
-            value1 = int(hexValueString, 16);
-            value2 = ord(key[i//2]);
-            xorValue = value1 ^ value2;
-            c += chr(xorValue);
-
-        return (str(c))
-
-    # print(decryptStringWithXORFromHex('0309021b0b000e1d115457564d04150e','secretkeeeeey'))
 
     @app.route('/', methods=('GET', 'POST'))
     def hello():
