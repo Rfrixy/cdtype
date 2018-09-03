@@ -3,7 +3,7 @@ from flask import Flask
 from pymongo import MongoClient
 import os
 from flask import (
-    render_template, request, session, redirect
+    render_template, request, session, redirect, jsonify
 )
 from flask_mail import Mail, Message
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -24,14 +24,11 @@ def create_app(database_uri=None, debug=True):
     app.config.from_mapping(
         SECRET_KEY='flaskycordovadev',
     )
+
     app.config.update(mail_settings)
     mail = Mail(app)
-    # connectTimeoutMS=30000, socketTimeoutMS=None, socketKeepAlive=True, connect=False, maxPoolsize=1
     client = MongoClient("mongodb://divesh:divesh123@ds123012.mlab.com:23012/typetest",connectTimeoutMS=30000, socketTimeoutMS=None, socketKeepAlive=True, connect=False, maxPoolsize=1)
     db = client.typetest
-    speed_results = db.scores
-    # var r = Math.floor(Math.random() * n);
-    # var randomElement = db.myCollection.find(query).limit(1).skip(r);
     try:
         os.makedirs(app.instance_path)
     except OSError:
@@ -55,10 +52,10 @@ def create_app(database_uri=None, debug=True):
         if len(user)!=1:
             error = 'no user found'
             return False
-        print ('found ', user)
+        # print ('found ', user)
         return user[0]
 
-    def check_and_update_speed(email,speed,timing=[],stddev=0):
+    def check_and_update_speed(email,speed,data = ""):
         email=email.lower()
         try:
             speed = float(speed)
@@ -70,7 +67,7 @@ def create_app(database_uri=None, debug=True):
         except:
             old_speed = 0.0
 
-        db.scores.update({'email':email},{'$push':{ 'history':{ 'speed':speed,'achieved_on': datetime.datetime.now(), 'stddev':stddev}}})
+        db.scores.update({'email':email},{'$push':{ 'history':{ 'speed':speed,'achieved_on': datetime.datetime.now(), 'data':data}}})
         print ('found speed', old_speed)
         print('new speed', speed)
         if speed > old_speed:
@@ -102,17 +99,22 @@ def create_app(database_uri=None, debug=True):
             try:
             # if 2:
                 d = request.get_json()
-                print(d)
+                # print(d)
                 hash = decryptStringWithXORFromHex(d['hash'],'secretkeeeeey')
                 speed = int(hash[:len(hash)//10])
                 if speed > 160:
                     return 'false'
                 from . import parser
-                res = parser.process_list(d['all_keys'])
+                text = db.scores.find_one({'email':mailid},{'text':1})
+                db.scores.update({'email':mailid},{'$set':{ 'text': ''}}) # WILL KILL SUCCESSIVE POSTS
+                res = parser.process_list(d,text)
                 assert(res[0])
-                check_and_update_speed(mailid,res[1],res[2],res[3])
-                return 'true'
-            except:
+                check_and_update_speed(mailid,res[1],res[2])
+                return jsonify(res[2],res[3])
+            except Exception as e:
+                print(e)
+                import traceback
+                traceback.print_exc()
                 return 'false'
         return 'false'
 
@@ -201,11 +203,15 @@ def create_app(database_uri=None, debug=True):
 
         texts = db.texts.find();
         textlist = list(texts)
-        scores = [ x for x in list(speed_results.find()) if x.get('speed')]
+        scores = [ x for x in list(db.scores.find()) if x.get('speed')]
         chosen_text = random.choice(textlist)['text']
+        email = session.get('user_mail')
+        if email:
+            db.scores.update({'email':email},{'$set':{ 'text': chosen_text}})
+
         return render_template("index.html",
             scores= sorted(scores, key=lambda x : x.get('speed'),reverse=True),
-            mailid = session.get('user_mail'),
+            email = email,
             text = chosen_text)
 
     return app

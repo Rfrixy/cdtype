@@ -15,30 +15,6 @@ target_setting = $("#output");
 
 
 
-// Crypto = CryptoJS;
-// var KEY = 'This is a key123';
-// var IV = 'This is an IV456';
-// var MODE = new Crypto.mode.CFB(Crypto.pad.ZeroPadding);
-// var plaintext = 'The answer is no';
-// var input_bytes = Crypto.charenc.UTF8.stringToBytes(plaintext);
-// var key = Crypto.charenc.UTF8.stringToBytes(KEY);
-// var options = {iv: Crypto.charenc.UTF8.stringToBytes(IV), asBytes: true, mode: MODE};
-// var encrypted = Crypto.AES.encrypt(input_bytes, key, options);
-// var encrypted_hex = Crypto.util.bytesToHex(encrypted);
-// console.log(encrypted_hex); // this is the value you send over the wire
-// output_bytes = Crypto.util.hexToBytes(encrypted_hex);
-// output_plaintext_bytes = Crypto.AES.decrypt(output_bytes, key, options);
-// output_plaintext = Crypto.charenc.UTF8.bytesToString(output_plaintext_bytes);
-// console.log(output_plaintext); // result: 'The answer is no'
-
-var publicKey = ("-----BEGIN PUBLIC KEY-----MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCVLVq7BCbYVSj3SmVaAcvaN3LXcR701ZTNLfiSUOfDFAr0g+A29RNQxxc5+nK+TXiIbIzNgjostC23zN16xEAZrilX4xzABe6jz89+KTJyeWWTTMstpL4v73nt9e/8q/euIEdzGzMhSLNpIPe8UTusV51pfqGjCKAjG7ow3X8JuQIDAQAB-----END PUBLIC KEY-----");
-// var secretMessage = "user input goes here";
-// var encrypted = publicKey.encrypt(secretMessage, "RSA-OAEP", {
-//             md: forge.md.sha256.create(),
-//             mgf1: forge.mgf1.create()
-//         });
-// var base64 = forge.util.encode64(encrypted);
-
 function encryptStringWithXORtoHex(input,key) {
     var c = '';
     while (key.length < input.length) {
@@ -60,7 +36,6 @@ function encryptStringWithXORtoHex(input,key) {
     }
     return c;
 }
-// console.log(encryptStringWithXORtoHex('plaintext1234wpm','secretkeeeeey'))
 
 type(input_text, target_setting, 0, time_setting, random_setting);
 
@@ -85,10 +60,6 @@ function type(input, target, current, time, random){
 	}
 }
 
-/*
- * The typing test stuff
- */
-
 var character_length = 31;
 var index = 0;
 var letters =  $("#type_text").val();
@@ -96,29 +67,77 @@ var started = false;
 var current_string = letters.substring(index, index + character_length);
 var start_time;
 var wordcount = 0;
+var timer = 0;
+var wpm = 0;
+var all_keys = [];
+var flight_list = [];
+var wpm_list = [];
+var ku_list = [];
+var kd_list = [];
+var errors = 0;
+var interval_timer;
+var complete = false;
+var reported = false;
+var prevcorrect = false;
+var prevtime = 0;
 
 $("html, body").click(function(){
   $("#textarea").focus();
 });
 
 $("#target").text(current_string);
-$(window).keypress(function(evt){
+
+
+$(window).keyup(function(evt){
+  evt = evt || window.event;
+  var charCode = evt.which || evt.keyCode;
+  var charTyped = evt.key;
+  if (charCode < 32 )//|| charCode > 126 )
+    return;
+  let obj = [charTyped,new Date().getTime() - start_time];
+  // obj[charTyped] =  new Date().getTime() - start_time;
+  ku_list.push(obj);
+  if (complete)
+    if(!reported)
+      finished();
+});
+
+
+$(window).keydown(function(evt){
   if(complete)
     return;
 
+  evt = evt || window.event;
+  var charCode = evt.which || evt.keyCode;
+  var charTyped = evt.key;
+
+  if (charCode < 32 )// || charCode > 126 )
+    return;
+    
   if(!started){
     start();
     started = true;
   }
-  evt = evt || window.event;
-  var charCode = evt.which || evt.keyCode;
-  var charTyped = String.fromCharCode(charCode);
+  currTime =  new Date().getTime();
+  // let obj = {};
+  // obj[charTyped] =  currTime - start_time;
+  let obj = [charTyped,new Date().getTime() - start_time];
+  kd_list.push(obj);
+
   if(charTyped == letters.charAt(index)){
     if(charTyped == " "){
       wordcount ++;
       $("#wordcount").text(wordcount);
     }
-    all_keys.push(charTyped, new Date().getTime() - start_time );
+
+    all_keys.push(currTime - start_time );
+
+    if(prevcorrect){
+      let obj = [charTyped, currTime - prevtime];
+      flight_list.push(obj);
+    }
+    prevcorrect = true;
+    prevtime = currTime;
     index ++;
     current_string = letters.substring(index, index + character_length);
     $("#target").text(current_string);
@@ -134,9 +153,11 @@ $(window).keypress(function(evt){
         $("#wpm").text(wpm);
         wpm_list.push(wpm);
         stop();
-        finished();
+
     }
   }else{
+    prevcorrect = false;
+    prevtime = currTime;
 		element = $("#typewrapper")
 		element.removeClass("mistake")
 		setTimeout(function () {
@@ -148,13 +169,6 @@ $(window).keypress(function(evt){
   }
 });
 
-var timer = 0;
-var wpm = 0;
-var all_keys = [];
-var wpm_list = [];
-var errors = 0;
-var interval_timer;
-var complete = false;
 
 $("#reset").click(function(){
   reset();
@@ -208,17 +222,20 @@ function reset(){
   // wpm = 0;
   // current_string = letters.substring(index, index + character_length);
   // $("#target").text(current_string);
+  // reported = false
 }
 
 function finished(){
-
+  reported = true;
 
   var data = 	{
   			speed: wpm,
         hash: encryptStringWithXORtoHex(wpm.toString().repeat(10),'secretkeeeeey'),
         all_keys:all_keys,
         wpm_history:wpm_list,
-        errors:errors
+        ku:ku_list,
+        kd:kd_list,
+        flight:flight_list,
   	};
 
   $.ajax({
@@ -229,22 +246,11 @@ function finished(){
       data : JSON.stringify(data),
       success : function(result) {
         console.log(result);
+
       },error : function(result){
          console.log(result);
       }
   });
-
-	// $.post("/postscore",
-	// {
-	// 		speed: wpm,
-  //     hash: encryptStringWithXORtoHex(wpm.toString().repeat(10),'secretkeeeeey'),
-  //     all_keys:all_keys,
-  //     wpm_history:wpm_list,
-  //     errors:errors
-	// },
-	// function(data, status){
-	// 		console.log("Data: " + data + "\nStatus: " + status);
-	// });
 
   alert("Congratulations!\nWords per minute: " + wpm + "\nWordcount: " + wordcount + "\nErrors:" + errors);
 }

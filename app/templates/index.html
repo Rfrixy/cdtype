@@ -83,12 +83,12 @@
   </div>
   <hr style="clear:both;" />
   <div>
-  <!-- <textarea name="" id="type_text" cols="30" rows="10">text</textarea> -->
+  <!-- <textarea name="" id="type_text" cols="30" rows="10">Text</textarea> -->
   <textarea name="" id="type_text" cols="30" rows="10">{{text}}</textarea>
   </div>
   <div class="settings">
-    <span>{{ 'The leaderboard will update automatically!' if mailid else 'The leaderboard does not automatically update!' }} </span>
-    <span style="float:right;">{{ 'Currently logged in as '+mailid if mailid else 'Sign up or Login if you want your score on the leaderboard.' }} </span>
+    <span>{{ 'The leaderboard will update automatically!' if email else 'The leaderboard does not automatically update!' }} </span>
+    <span style="float:right;">{{ 'Currently logged in as '+email if email else 'Sign up or Login if you want your score on the leaderboard.' }} </span>
     <!-- <a href="#" id="reset">Reset</a> | <a href="#" id="change">Change text</a> | <a href="#" id="pause">Pause II</a> -->
   </div>
 </div>
