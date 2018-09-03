@@ -90,8 +90,12 @@ def process_list(data,text):
     mean = statistics.mean(flight_list)
     covar = devn/mean
     wpm_brackets,recalculated_wpm = process_wpm_brackets(timing,text)
+
     if recalculated_wpm - wpm > 5 or recalculated_wpm - wpm < -5:
         return(False,)
+
+    if statistics.mean(dwell_times) < 50:
+        return (False,)
 
     data = {}
     data['wpm'] = wpm
