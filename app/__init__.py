@@ -94,7 +94,6 @@ def create_app(database_uri=None, debug=True):
     @app.route('/postscore',methods=['POST'])
     def post_score():
         mailid = session.get('user_mail')
-
         if (mailid):
             try:
             # if 2:
@@ -195,6 +194,7 @@ def create_app(database_uri=None, debug=True):
                     user = get_user(email)
                     if user:
                         session['user_mail'] = user['email']
+                        session.permanent = True
                         return redirect('/')
                     else:
                         session.clear()
