@@ -1,5 +1,5 @@
 import statistics
-# TODO: split function into many
+import uuid
 
 def process_dwell(data):
     ku = data['ku'][:]
@@ -40,6 +40,27 @@ def process_overlap(dwell_list):
             overlap_list.append([dwell_list[i][0],dwell_list[i+1][0], dwell_list[i][2] - dwell_list[i+1][1]])
     return overlap_list
 
+def process_flight(data):
+    flight = data['flight']
+    flight_list = []
+    flight_dict = {}
+
+    for f in flight:
+        flight_list.append(f[1])
+        if f[0] in flight_dict:
+            flight_dict[f[0]].append(f[1])
+        else:
+            flight_dict[f[0]] = [f[1]]
+
+    flight_result = []
+    for k in flight_dict:
+        if len(flight_dict[k])>4:
+            flight_result.append([k, sum(flight_dict[k])/len(flight_dict[k])])
+        flight_dict[k] = sum(flight_dict[k])/len(flight_dict[k])
+
+    l = sorted(flight_result,key = lambda x: x[1], reverse = True)
+
+    return flight_list,l
 
 def process_wpm_brackets(timing,text):
     wpm_brackets = []
@@ -59,10 +80,13 @@ def process_wpm_brackets(timing,text):
     for w in wpm_list:
         denom += 1/w
     recalculated_wpm = len(wpm_list)/denom
-
     return wpm_brackets,recalculated_wpm
 
+
 def process_list(data,text):
+    result = {}
+    extra_data = {}
+    verbose_data = {}
     ts_list = data['all_keys']
     text = text['text']
 
@@ -76,41 +100,48 @@ def process_list(data,text):
     wpm = round(wpm)
     errors = process_accuracy(data,text)
     dwell_list,dwell_times = process_dwell(data)
-    # print(dwell_list,'dwell list')
     overlap_list = process_overlap(dwell_list)
     overlap_percent = len(overlap_list)/len(dwell_list)
-    # print(overlap_list,'overlap list')
-    flight = data['flight']
-    flight_list = []
-    for f in flight:
-        flight_list.append(f[1])
-    # print(flight_list)
-    # print('mflight stddev',statistics.stdev(flight_list))
+    flight_list,l = process_flight(data)
+
     devn = statistics.stdev(flight_list)
     mean = statistics.mean(flight_list)
     covar = devn/mean
     wpm_brackets,recalculated_wpm = process_wpm_brackets(timing,text)
+    dwell_mean = statistics.mean(dwell_times)
+    dwell_std = statistics.stdev(dwell_times)
 
     if recalculated_wpm - wpm > 5 or recalculated_wpm - wpm < -5:
-        return(False,)
+        result['bot'] = True
+    if dwell_mean < 50:
+        result['bot'] = True
+    if covar < 0.1:
+        result['bot'] = True
+    if dwell_std > 500:
+        result['bot'] = True
 
-    if statistics.mean(dwell_times) < 50:
-        return (False,)
+    result['wpm'] = wpm
+    result['accuracy'] = len(text)/(len(text) + errors)
+    result['dwell'] = dwell_mean
+    result['flight'] = statistics.mean(flight_list)
+    result['flightstd'] = statistics.stdev(flight_list)
+    result['dwellstd'] = dwell_std
+    result['overlap'] = overlap_percent
+    result['covar'] = covar
+    result['text'] = text
+    result['key'] = str(uuid.uuid4())
+    if 'bot' not in result:
+        result['bot'] = False
 
-    data = {}
-    data['wpm'] = wpm
-    data['accuracy'] = len(text)/(len(text) + errors)
-    data['dwell'] = statistics.mean(dwell_times)
-    data['flight'] = statistics.mean(flight_list)
-    data['flightstd'] = statistics.stdev(flight_list)
-    data['dwellstd'] = statistics.stdev(dwell_times)
-    data['overlap'] = overlap_percent
-    data['covar'] = covar
-    data['text'] = text
-    # data['brackets'] = wpm_brackets
-    print(data)
+    verbose_data['all_keys'] = data['all_keys']
+    verbose_data['flight'] = data['flight']
+    verbose_data['ku'] = data['ku']
+    verbose_data['kd'] = data['kd']
 
-    return ( True, wpm, data ,wpm_brackets)
+    extra_data['brackets'] = wpm_brackets
+    extra_data['keys_flight'] = l
+
+    print(result)
+    return ( True, wpm, result ,extra_data, verbose_data)
 
 # imp params decreasing: overlap,  dwell stddev, dwell, flight,correct covar,
-    return (False,)

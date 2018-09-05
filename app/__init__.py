@@ -55,7 +55,7 @@ def create_app(database_uri=None, debug=True):
         # print ('found ', user)
         return user[0]
 
-    def check_and_update_speed(email,speed,data = ""):
+    def check_and_update_speed(email,speed):
         email=email.lower()
         try:
             speed = float(speed)
@@ -67,7 +67,6 @@ def create_app(database_uri=None, debug=True):
         except:
             old_speed = 0.0
 
-        db.scores.update({'email':email},{'$push':{ 'history':{ 'speed':speed,'achieved_on': datetime.datetime.now(), 'data':data}}})
         print ('found speed', old_speed)
         print('new speed', speed)
         if speed > old_speed:
@@ -98,7 +97,6 @@ def create_app(database_uri=None, debug=True):
             try:
             # if 2:
                 d = request.get_json()
-                # print(d)
                 hash = decryptStringWithXORFromHex(d['hash'],'secretkeeeeey')
                 speed = int(hash[:len(hash)//10])
                 if speed > 160:
@@ -108,8 +106,14 @@ def create_app(database_uri=None, debug=True):
                 db.scores.update({'email':mailid},{'$set':{ 'text': ''}}) # WILL KILL SUCCESSIVE POSTS
                 res = parser.process_list(d,text)
                 assert(res[0])
-                check_and_update_speed(mailid,res[1],res[2])
-                return jsonify(res[2],res[3])
+                db.scores.update({'email':mailid},{'$push':{ 'history':{ 'speed':speed,'achieved_on': datetime.datetime.now(), 'data':res[2]}}})
+                db.runs.insert({'key':res[2]['key'],'date': datetime.datetime.now(),'data':res[4]})
+
+                if not res[2]['bot']:
+                    check_and_update_speed(mailid,res[1])
+                    return jsonify(res[2],res[3])
+                else:
+                    return 'false'
             except Exception as e:
                 print(e)
                 import traceback
@@ -157,7 +161,7 @@ def create_app(database_uri=None, debug=True):
                 return render_template("sign_up.html",text= True, duplicate=True)
             if name and email and dept:
                 sendLoginMail(email)
-                db.scores.insert({'email': email, 'name':name, 'dept':dept})
+                db.scores.insert({'email': email, 'name':name, 'dept':dept, 'created_at':datetime.datetime.now()})
                 return render_template("sign_up.html",text= True, success=True)
             else:
                 return render_template("sign_up.html",error= True)
