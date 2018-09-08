@@ -103,11 +103,10 @@ def create_app(database_uri=None, debug=True):
                     return 'false'
                 from . import parser
                 text = db.scores.find_one({'email':mailid},{'text':1})
-                db.scores.update({'email':mailid},{'$set':{ 'text': ''}}) # WILL KILL SUCCESSIVE POSTS
+                db.scores.update({'email':mailid},{'$set':{ 'text': ''}})
                 res = parser.process_list(d,text)
                 assert(res[0])
                 db.scores.update({'email':mailid},{'$push':{ 'history':{ 'speed':speed,'achieved_on': datetime.datetime.now(), 'data':res[2]}}})
-                db.runs.insert({'key':res[2]['key'],'date': datetime.datetime.now(),'data':res[4]})
 
                 if not res[2]['bot']:
                     check_and_update_speed(mailid,res[1])
@@ -209,6 +208,7 @@ def create_app(database_uri=None, debug=True):
         textlist = list(texts)
         scores = [ x for x in list(db.scores.find()) if x.get('speed')]
         chosen_text = random.choice(textlist)['text']
+        # chosen_text = 'asdfjkl;asdfjkl;'#TEST
         email = session.get('user_mail')
         if email:
             db.scores.update({'email':email},{'$set':{ 'text': chosen_text}})
