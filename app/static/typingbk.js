@@ -113,7 +113,7 @@ $(window).keydown(function(evt){
 
   if (charCode < 32 )// || charCode > 126 )
     return;
-    
+
   if(!started){
     start();
     started = true;
@@ -246,15 +246,69 @@ function finished(){
       data : JSON.stringify(data),
       success : function(result) {
         console.log(result);
-
+        show_report(result);
       },error : function(result){
          console.log(result);
+         alert('failed to process'+error)
       }
   });
 
-  alert("Congratulations!\nWords per minute: " + wpm + "\nWordcount: " + wordcount + "\nErrors:" + errors);
+  // alert("Congratulations!\nWords per minute: " + wpm + "\nWordcount: " + wordcount + "\nErrors:" + errors);
 }
 
+
+function show_report(resp){
+  data= resp[0];
+  brackets = resp[1]['brackets'];
+  $("#test").hide();
+  $("#result").show();
+  $(".result_stat").html(data['wpm']+' WPM</br>' + Math.round(data['accuracy'] * 10000) / 100  + '% Accuracy');
+  $(".typed_text").html(data['text']);
+  texts =[];
+  scores =[];
+  for (var i = 0; i < brackets.length; i++) {
+      texts.push(brackets[i][1]);
+      scores.push(brackets[i][0]);
+  }
+
+  var ctx = document.getElementById("myChart").getContext('2d');
+  min = parseInt(Math.min(...scores)/10)
+  max = parseInt(Math.max(...scores)/10)
+  console.log(min)
+  min -=1; min *=10;
+  max +=1; max *=10;
+  var myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+          labels: texts,
+          datasets: [{
+              label: 'WPM',
+              data: scores,
+              backgroundColor: 'rgba(54, 162, 235, 0.2)',
+              borderColor: 'rgba(54, 162, 235, 1)',
+              hoverBackgroundColor: 'rgba(153, 102, 255, 0.2)',
+              hoverBorderColor: 'rgba(153, 102, 255, 1)',
+              borderWidth: 1
+          }]
+      },
+      options: {
+          legend: {
+              display: false
+          },
+          scales: {
+              yAxes: [{
+                  ticks: {
+                      min: min,
+                      max: max
+                  }
+              }],
+              xAxes:[{
+                display:false
+              }]
+          }
+      }
+  });
+}
 var window_focus;
 
 $(window).focus(function() {
@@ -264,6 +318,7 @@ $(window).focus(function() {
 });
 
 $(document).ready(function(){
+  $("#result").hide();
   if(window_focus){
     $("#focus").hide();
   }

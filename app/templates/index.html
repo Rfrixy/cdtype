@@ -2,6 +2,10 @@
 
 {% block content %}
 
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='typestyle.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='result.css') }}">
+
 <div class="wrapper" id="parent">
   <div class="wrapper__header">
     <div class="b_logo"><img src="https://images.vexels.com/media/users/3/135313/isolated/lists/9c44517fa04da541c35888362bce2d1b-award-trophy-icon.png" width="40" alt=""/></div>
@@ -9,39 +13,6 @@
       <p>Collegedunia<span>typing leaderboard</span></p>
     </div>
   </div>
-
-  <!-- <div>
-    <form class="inputs">
-      <label for="dept">Type</label>
-      <select id="team" name="team" required>
-        <option value="Speed">Speed</option>
-        <option value="Races">Races</option>
-      </select>
-      <label for="dept">Team</label>
-      <select id="team" name="team" required>
-        <option value="Tech" selected>All</option>
-        <option value="Tech">Tech</option>
-        <option value="Content">Content</option>
-        <option value="Client">Client</option>
-        <option value="Sales">Sales</option>
-        <option value="Mail">Mail</option>
-        <option value="Mobile">Mobile</option>
-        <option value="Admin">Admin</option>
-        <option value="Operations">Operations</option>
-        <option value="Product">Product</option>
-        <option value="Graphic">Graphic</option>
-        <option value="SEO">SEO</option>
-        <option value="HR">HR</option>
-      </select>
-      <label for="dept">Dept</label>
-      <select id="dept" name="dept" required>
-        <option value="Tech" selected>All</option>
-        <option value="Collegedunia">Collegedunia</option>
-        <option value="3dot14">3dot14</option>
-        <option value="Zoutons">Zoutons</option>
-      </select>
-    </form>
-  </div> -->
 
   <div class="wrapper__content">
     <ul>
@@ -68,7 +39,7 @@
 <link href='https://fonts.googleapis.com/css?family=Cutive+Mono|Roboto:400,900,700' rel='stylesheet' type='text/css'/>
 <!-- <p id="focus">Click this window to give it focus (Start typing with a capital S!)</p> -->
 
-<div id="typewrapper">
+<div class="typewrapper" id="test" >
   <h3 id="output"></h3>
   <div class="target mono" id="target"></div>
   <div id="your-attempt" class="mono your-attempt" placeholder="Your text will appear here"></div>
@@ -86,11 +57,36 @@
   <!-- <textarea name="" id="type_text" cols="30" rows="10">Text</textarea> -->
   <textarea name="" id="type_text" cols="30" rows="10">{{text}}</textarea>
   </div>
-  <div class="settings">
-    <span>{{ 'The leaderboard will update automatically!' if email else 'The leaderboard does not automatically update!' }} </span>
-    <span style="float:right;">{{ 'Currently logged in as '+email if email else 'Sign up or Login if you want your score on the leaderboard.' }} </span>
-    <!-- <a href="#" id="reset">Reset</a> | <a href="#" id="change">Change text</a> | <a href="#" id="pause">Pause II</a> -->
+</div>
+
+
+<div class="typewrapper" id="result">
+  <h4>Typing Report</h4>
+
+  <div class='result_graph_parent'>
+    <div class='wpm_results'>
+      <div class='result_stat'>
+        88 WPM
+      </br>
+        98% Accuracy
+      </div>
+      <div class='typed_text'>
+        For centuries, the battle of morality was fought between those who claimed that your life belongs to God and those who claimed that it belongs to your neighbors. And no one came to say that your life belongs to you and that the good is to live it.
+      </div>
+      <div class='retry'>
+        <a id='retry' href=".">Restart</a>
+      </div>
+    </div>
+    <div class='wpm_graph'>
+      <canvas id="myChart" width="100" height="40"></canvas>
+    </div>
   </div>
+</div>
+
+<div class="settings">
+  <span>{{ 'The leaderboard will update automatically!' if email else 'The leaderboard does not automatically update!' }} </span>
+  <span style="float:right;">{{ 'Currently logged in as '+email if email else 'Sign up or Login if you want your score on the leaderboard.' }} </span>
+  <!-- <a href="#" id="reset">Reset</a> | <a href="#" id="change">Change text</a> | <a href="#" id="pause">Pause II</a> -->
 </div>
 
 <script src="{{url_for('static', filename='typing.js')}}"></script>

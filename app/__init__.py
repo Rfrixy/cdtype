@@ -7,6 +7,7 @@ from flask import (
 )
 from flask_mail import Mail, Message
 from werkzeug.security import check_password_hash, generate_password_hash
+from . import dataops
 
 def create_app(database_uri=None, debug=True):
     app = Flask(__name__, instance_relative_config=True)
@@ -67,23 +68,11 @@ def create_app(database_uri=None, debug=True):
         except:
             old_speed = 0.0
 
-        print ('found speed', old_speed)
-        print('new speed', speed)
+        new_params = dataops.process_history(user)
+        db.scores.update({'email':email}, {'$set': { 'averages':new_params }})
         if speed > old_speed:
             db.scores.update({'email':email},{'$set':{'speed':speed,'achieved_on': datetime.datetime.now()}})
 
-    def decryptStringWithXORFromHex( input, key):
-        while (len(key) < len(input)/2):
-            key += key;
-        c = ""
-        for i in range(0,len(input),2):
-            hexValueString = input[i:i+2]
-            value1 = int(hexValueString, 16);
-            value2 = ord(key[i//2]);
-            xorValue = value1 ^ value2;
-            c += chr(xorValue);
-
-        return (str(c))
 
 
     @app.route('/createuser')
@@ -97,7 +86,7 @@ def create_app(database_uri=None, debug=True):
             try:
             # if 2:
                 d = request.get_json()
-                hash = decryptStringWithXORFromHex(d['hash'],'secretkeeeeey')
+                hash = dataops.decryptStringWithXORFromHex(d['hash'],'secretkeeeeey')
                 speed = int(hash[:len(hash)//10])
                 if speed > 160:
                     return 'false'
@@ -119,6 +108,10 @@ def create_app(database_uri=None, debug=True):
                 traceback.print_exc()
                 return 'false'
         return 'false'
+
+    @app.route('/statistics')
+    def statistics():
+        return render_template('statistics.html')
 
     @app.route('/profile')
     def profile():
@@ -181,7 +174,6 @@ def create_app(database_uri=None, debug=True):
                 if user:
                     check_and_update_speed(email,float(speed))
                 else:
-                    print ('speedtype',type(speed))
                     db.scores.insert({'email': email, 'name':username, 'speed':speed, 'achieved_on': datetime.datetime.now(), 'dept':dept})
                     print('created user with', request.form)
                     user = get_user(email)
@@ -208,7 +200,7 @@ def create_app(database_uri=None, debug=True):
         textlist = list(texts)
         scores = [ x for x in list(db.scores.find()) if x.get('speed')]
         chosen_text = random.choice(textlist)['text']
-        # chosen_text = 'asdfjkl;asdfjkl;'#TEST
+        # chosen_text =  'asdfasdfasdfasdfasdf'
         email = session.get('user_mail')
         if email:
             db.scores.update({'email':email},{'$set':{ 'text': chosen_text}})

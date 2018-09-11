@@ -1,5 +1,5 @@
+'''Statistical analysis on typing data'''
 import statistics
-import uuid
 
 def process_dwell(data):
     dwell_times = []
@@ -90,7 +90,7 @@ def process_wpm_brackets(timing,text):
         if f + n >= len(text):
             f = len(text)-1
         curr_wpm =   (f-i)*12/ ((timing[f] - timing[i])/1000)
-        wpm_brackets.append([curr_wpm,text[i:f]])
+        wpm_brackets.append([round(curr_wpm,2),text[i:f]])
         wpm_list.append(curr_wpm)
         i = f
 
@@ -149,9 +149,9 @@ def process_list(data,text):
         result['bot'] = True
 
     serialized_kd_ku = serialize_kd_ku(data['kd'],data['ku'])
-    print(serialized_kd_ku)
+    # print(serialized_kd_ku)
     result['wpm'] = wpm
-    result['accuracy'] = len(text)/(len(text) + errors)
+    result['accuracy'] = round(len(text)/(len(text) + errors), 2)
     result['dwell'] = dwell_mean
     result['flight'] = statistics.mean(flight_list)
     result['flightstd'] = statistics.stdev(flight_list)
@@ -167,7 +167,6 @@ def process_list(data,text):
     extra_data['brackets'] = wpm_brackets
     extra_data['keys_flight'] = l
 
-    print(result)
     return ( True, wpm, result ,extra_data)
 
 # imp params decreasing: overlap,  dwell stddev, dwell, flight,correct covar,

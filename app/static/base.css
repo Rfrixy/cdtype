@@ -1,3 +1,22 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,700");
+ * {
+  padding: 0;
+  margin: 0;
+}
+
+
+body,
+html {
+  min-width: 100%;
+  width: 100%;
+  background: #f9f9f9;
+  font-family: "Montserrat", sans-serif !important;
+}
+
+.navbar {
+  margin-bottom: 10px;
+}
+
 .navbar ul {
     list-style-type: none;
     margin: 0;
@@ -8,6 +27,7 @@
 
 .navbar li {
     float: right;
+    margin-bottom: 0;
 }
 
 .navbar li a {
@@ -18,7 +38,11 @@
     text-decoration: none;
 }
 
-.navbar li a:hover:not(.active) {
+/* .navbar li a:hover:not(.active) {
+    background-color: #111;
+} */
+
+.navbar li a:hover {
     background-color: #111;
 }
 
