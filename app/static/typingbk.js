@@ -158,7 +158,7 @@ $(window).keydown(function(evt){
   }else{
     prevcorrect = false;
     prevtime = currTime;
-		element = $("#typewrapper")
+		element = $("#test")
 		element.removeClass("mistake")
 		setTimeout(function () {
 				element.addClass("mistake")
