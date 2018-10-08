@@ -50,7 +50,7 @@ def create_app(database_uri=None, debug=True):
     def get_user(email):
         email=email.lower()
         user = list(db.scores.find({'email':email}))
-        if len(user)!=1:
+        if len(user)<=0:
             error = 'no user found'
             return False
         # print ('found ', user)
