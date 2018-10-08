@@ -1,1 +1,328 @@
-var _0x77bb=["\x48\x6F\x77\x20\x66\x61\x73\x74\x20\x63\x61\x6E\x20\x79\x6F\x75\x20\x74\x79\x70\x65\x3F","\x23\x6F\x75\x74\x70\x75\x74","","\x6C\x65\x6E\x67\x74\x68","\x63\x68\x61\x72\x43\x6F\x64\x65\x41\x74","\x31\x36","\x30","\x43\x6F\x6D\x70\x6C\x65\x74\x65\x2E","\x6C\x6F\x67","\x73\x75\x62\x73\x74\x72\x69\x6E\x67","\x74\x65\x78\x74","\x72\x61\x6E\x64\x6F\x6D","\x76\x61\x6C","\x23\x74\x79\x70\x65\x5F\x74\x65\x78\x74","\x66\x6F\x63\x75\x73","\x23\x74\x65\x78\x74\x61\x72\x65\x61","\x63\x6C\x69\x63\x6B","\x68\x74\x6D\x6C\x2C\x20\x62\x6F\x64\x79","\x23\x74\x61\x72\x67\x65\x74","\x65\x76\x65\x6E\x74","\x77\x68\x69\x63\x68","\x6B\x65\x79\x43\x6F\x64\x65","\x6B\x65\x79","\x67\x65\x74\x54\x69\x6D\x65","\x70\x75\x73\x68","\x6B\x65\x79\x75\x70","\x63\x68\x61\x72\x41\x74","\x20","\x23\x77\x6F\x72\x64\x63\x6F\x75\x6E\x74","\x61\x70\x70\x65\x6E\x64","\x23\x79\x6F\x75\x72\x2D\x61\x74\x74\x65\x6D\x70\x74","\x72\x6F\x75\x6E\x64","\x23\x74\x69\x6D\x65\x72","\x23\x77\x70\x6D","\x23\x74\x65\x73\x74","\x6D\x69\x73\x74\x61\x6B\x65","\x72\x65\x6D\x6F\x76\x65\x43\x6C\x61\x73\x73","\x61\x64\x64\x43\x6C\x61\x73\x73","\x3C\x73\x70\x61\x6E\x20\x63\x6C\x61\x73\x73\x3D\x27\x77\x72\x6F\x6E\x67\x27\x3E","\x3C\x2F\x73\x70\x61\x6E\x3E","\x23\x65\x72\x72\x6F\x72\x73","\x6B\x65\x79\x64\x6F\x77\x6E","\x23\x72\x65\x73\x65\x74","\x73\x68\x6F\x77","\x23\x63\x68\x61\x6E\x67\x65","\x23\x70\x61\x75\x73\x65","\x63\x68\x61\x6E\x67\x65","\x72\x65\x6C\x6F\x61\x64","\x72\x65\x70\x65\x61\x74","\x73\x65\x63\x72\x65\x74\x6B\x65\x65\x65\x65\x65\x79","\x50\x4F\x53\x54","\x61\x70\x70\x6C\x69\x63\x61\x74\x69\x6F\x6E\x2F\x6A\x73\x6F\x6E","\x2F\x70\x6F\x73\x74\x73\x63\x6F\x72\x65","\x6A\x73\x6F\x6E","\x73\x74\x72\x69\x6E\x67\x69\x66\x79","\x66\x61\x69\x6C\x65\x64\x20\x74\x6F\x20\x70\x72\x6F\x63\x65\x73\x73","\x61\x6A\x61\x78","\x62\x72\x61\x63\x6B\x65\x74\x73","\x68\x69\x64\x65","\x23\x72\x65\x73\x75\x6C\x74","\x77\x70\x6D","\x20\x57\x50\x4D\x3C\x2F\x62\x72\x3E","\x61\x63\x63\x75\x72\x61\x63\x79","\x25\x20\x41\x63\x63\x75\x72\x61\x63\x79","\x68\x74\x6D\x6C","\x2E\x72\x65\x73\x75\x6C\x74\x5F\x73\x74\x61\x74","\x2E\x74\x79\x70\x65\x64\x5F\x74\x65\x78\x74","\x32\x64","\x67\x65\x74\x43\x6F\x6E\x74\x65\x78\x74","\x6D\x79\x43\x68\x61\x72\x74","\x67\x65\x74\x45\x6C\x65\x6D\x65\x6E\x74\x42\x79\x49\x64","\x6D\x69\x6E","\x6D\x61\x78","\x62\x61\x72","\x57\x50\x4D","\x72\x67\x62\x61\x28\x35\x34\x2C\x20\x31\x36\x32\x2C\x20\x32\x33\x35\x2C\x20\x30\x2E\x32\x29","\x72\x67\x62\x61\x28\x35\x34\x2C\x20\x31\x36\x32\x2C\x20\x32\x33\x35\x2C\x20\x31\x29","\x72\x67\x62\x61\x28\x31\x35\x33\x2C\x20\x31\x30\x32\x2C\x20\x32\x35\x35\x2C\x20\x30\x2E\x32\x29","\x72\x67\x62\x61\x28\x31\x35\x33\x2C\x20\x31\x30\x32\x2C\x20\x32\x35\x35\x2C\x20\x31\x29","\x62\x6C\x75\x72","\x23\x66\x6F\x63\x75\x73","\x72\x65\x61\x64\x79"];time_setting= 30;random_setting= 100;input_text= _0x77bb[0];target_setting= $(_0x77bb[1]);function encryptStringWithXORtoHex(_0x2dedx2,_0x2dedx3){var _0x2dedx4=_0x77bb[2];while(_0x2dedx3[_0x77bb[3]]< _0x2dedx2[_0x77bb[3]]){_0x2dedx3+= _0x2dedx3};for(var _0x2dedx5=0;_0x2dedx5< _0x2dedx2[_0x77bb[3]];_0x2dedx5++){var _0x2dedx6=_0x2dedx2[_0x2dedx5][_0x77bb[4]](0);var _0x2dedx7=_0x2dedx3[_0x2dedx5][_0x77bb[4]](0);var _0x2dedx8=_0x2dedx6^ _0x2dedx7;var _0x2dedx9=_0x2dedx8.toString(_0x77bb[5]);if(_0x2dedx9[_0x77bb[3]]< 2){_0x2dedx9= _0x77bb[6]+ _0x2dedx9};_0x2dedx4+= _0x2dedx9};return _0x2dedx4}type(input_text,target_setting,0,time_setting,random_setting);function type(_0x2dedx2,_0x2dedxb,_0x2dedxc,_0x2dedxd,_0x2dedxe){if(_0x2dedxc> _0x2dedx2[_0x77bb[3]]){console[_0x77bb[8]](_0x77bb[7])}else {_0x2dedxc+= 1;_0x2dedxb[_0x77bb[10]](_0x2dedx2[_0x77bb[9]](0,_0x2dedxc));setTimeout(function(){type(_0x2dedx2,_0x2dedxb,_0x2dedxc,_0x2dedxd,_0x2dedxe)},_0x2dedxd+ Math[_0x77bb[11]]()* _0x2dedxe)}}var character_length=31;var index=0;var letters=$(_0x77bb[13])[_0x77bb[12]]();var started=false;var current_string=letters[_0x77bb[9]](index,index+ character_length);var start_time;var wordcount=0;var timer=0;var wpm=0;var all_keys=[];var flight_list=[];var wpm_list=[];var ku_list=[];var kd_list=[];var errors=0;var interval_timer;var complete=false;var reported=false;var prevcorrect=false;var prevtime=0;$(_0x77bb[17])[_0x77bb[16]](function(){$(_0x77bb[15])[_0x77bb[14]]()});$(_0x77bb[18])[_0x77bb[10]](current_string);$(window)[_0x77bb[25]](function(_0x2dedx23){_0x2dedx23= _0x2dedx23|| window[_0x77bb[19]];var _0x2dedx24=_0x2dedx23[_0x77bb[20]]|| _0x2dedx23[_0x77bb[21]];var _0x2dedx25=_0x2dedx23[_0x77bb[22]];if(_0x2dedx24< 32){return};let _0x2dedx26=[_0x2dedx25, new Date()[_0x77bb[23]]()- start_time];ku_list[_0x77bb[24]](_0x2dedx26);if(complete){if(!reported){finished()}}});$(window)[_0x77bb[41]](function(_0x2dedx23){if(complete){return};_0x2dedx23= _0x2dedx23|| window[_0x77bb[19]];var _0x2dedx24=_0x2dedx23[_0x77bb[20]]|| _0x2dedx23[_0x77bb[21]];var _0x2dedx25=_0x2dedx23[_0x77bb[22]];if(_0x2dedx24< 32){return};if(!started){start();started= true};currTime=  new Date()[_0x77bb[23]]();let _0x2dedx26=[_0x2dedx25, new Date()[_0x77bb[23]]()- start_time];kd_list[_0x77bb[24]](_0x2dedx26);if(_0x2dedx25== letters[_0x77bb[26]](index)){if(_0x2dedx25== _0x77bb[27]){wordcount++;$(_0x77bb[28])[_0x77bb[10]](wordcount)};all_keys[_0x77bb[24]](currTime- start_time);if(prevcorrect){let _0x2dedx26=[_0x2dedx25,currTime- prevtime];flight_list[_0x77bb[24]](_0x2dedx26)};prevcorrect= true;prevtime= currTime;index++;current_string= letters[_0x77bb[9]](index,index+ character_length);$(_0x77bb[18])[_0x77bb[10]](current_string);$(_0x77bb[30])[_0x77bb[29]](_0x2dedx25);if(index== letters[_0x77bb[3]]){wordcount++;$(_0x77bb[28])[_0x77bb[10]](wordcount);$(_0x77bb[32])[_0x77bb[10]](Math[_0x77bb[31]](timer* 100)/ 100);if(timer== 0){timer= 1};wpm= Math[_0x77bb[31]]((index/ 5)/ (timer/ 60));$(_0x77bb[33])[_0x77bb[10]](wpm);wpm_list[_0x77bb[24]](wpm);stop()}}else {prevcorrect= false;prevtime= currTime;element= $(_0x77bb[34]);element[_0x77bb[36]](_0x77bb[35]);setTimeout(function(){element[_0x77bb[37]](_0x77bb[35])},1);$(_0x77bb[30])[_0x77bb[29]](_0x77bb[38]+ _0x2dedx25+ _0x77bb[39]);errors++;$(_0x77bb[40])[_0x77bb[10]](errors)}});$(_0x77bb[42])[_0x77bb[16]](function(){reset()});$(_0x77bb[44])[_0x77bb[16]](function(){$(_0x77bb[13])[_0x77bb[43]]()[_0x77bb[14]]()});$(_0x77bb[45])[_0x77bb[16]](function(){stop()});$(_0x77bb[13])[_0x77bb[46]](function(){reset()});function start(){start_time=  new Date()[_0x77bb[23]]();interval_timer= setInterval(function(){timer+= 0.1;timer= Math[_0x77bb[31]](timer* 100)/ 100;$(_0x77bb[32])[_0x77bb[10]](timer);wpm= Math[_0x77bb[31]]((index/ 5)/ (timer/ 60));wpm_list[_0x77bb[24]](wpm);$(_0x77bb[33])[_0x77bb[10]](wpm)},100)}function stop(){clearInterval(interval_timer);started= false;complete= true}function reset(){location[_0x77bb[47]](true)}function finished(){reported= true;var _0x2dedx2b={speed:wpm,hash:encryptStringWithXORtoHex(wpm.toString()[_0x77bb[48]](10),_0x77bb[49]),all_keys:all_keys,wpm_history:wpm_list,ku:ku_list,kd:kd_list,flight:flight_list};$[_0x77bb[56]]({type:_0x77bb[50],contentType:_0x77bb[51],url:_0x77bb[52],dataType:_0x77bb[53],data:JSON[_0x77bb[54]](_0x2dedx2b),success:function(_0x2dedx2c){console[_0x77bb[8]](_0x2dedx2c);show_report(_0x2dedx2c)},error:function(_0x2dedx2c){console[_0x77bb[8]](_0x2dedx2c);alert(_0x77bb[55]+ error)}})}function show_report(_0x2dedx2e){data= _0x2dedx2e[0];brackets= _0x2dedx2e[1][_0x77bb[57]];$(_0x77bb[34])[_0x77bb[58]]();$(_0x77bb[59])[_0x77bb[43]]();$(_0x77bb[65])[_0x77bb[64]](data[_0x77bb[60]]+ _0x77bb[61]+ Math[_0x77bb[31]](data[_0x77bb[62]]* 10000)/ 100+ _0x77bb[63]);$(_0x77bb[66])[_0x77bb[64]](data[_0x77bb[10]]);texts= [];scores= [];for(var _0x2dedx5=0;_0x2dedx5< brackets[_0x77bb[3]];_0x2dedx5++){texts[_0x77bb[24]](brackets[_0x2dedx5][1]);scores[_0x77bb[24]](brackets[_0x2dedx5][0])};var _0x2dedx2f=document[_0x77bb[70]](_0x77bb[69])[_0x77bb[68]](_0x77bb[67]);min= parseInt(Math[_0x77bb[71]](...scores) / 10);max= parseInt(Math[_0x77bb[72]](...scores) / 10);console[_0x77bb[8]](min);min-= 1;min*= 10;max+= 1;max*= 10;var _0x2dedx30= new Chart(_0x2dedx2f,{type:_0x77bb[73],data:{labels:texts,datasets:[{label:_0x77bb[74],data:scores,backgroundColor:_0x77bb[75],borderColor:_0x77bb[76],hoverBackgroundColor:_0x77bb[77],hoverBorderColor:_0x77bb[78],borderWidth:1}]},options:{legend:{display:false},scales:{yAxes:[{ticks:{min:min,max:max}}],xAxes:[{display:false}]}}})}var window_focus;$(window)[_0x77bb[14]](function(){window_focus= true})[_0x77bb[79]](function(){window_focus= false});$(document)[_0x77bb[81]](function(){$(_0x77bb[59])[_0x77bb[58]]();if(window_focus){$(_0x77bb[80])[_0x77bb[58]]()};$(window)[_0x77bb[14]](function(){$(_0x77bb[80])[_0x77bb[58]]()})})
+/*
+ * The animation at the start, made from my previous pen
+ * https://codepen.io/EightArmsHQ/pen/HJsav
+ */
+
+// The base speed per character
+time_setting = 30;
+// How much to 'sway' (random * this-many-milliseconds)
+random_setting = 100;
+// The text to use NB use \n not real life line breaks!
+input_text = "How fast can you type?";
+// Where to fill up
+target_setting = $("#output");
+// Launch that function!
+
+
+
+function encryptStringWithXORtoHex(input,key) {
+    var c = '';
+    while (key.length < input.length) {
+         key += key;
+    }
+    for(var i=0; i<input.length; i++) {
+        var value1 = input[i].charCodeAt(0);
+        var value2 = key[i].charCodeAt(0);
+
+        var xorValue = value1 ^ value2;
+
+        var xorValueAsHexString = xorValue.toString("16");
+
+        if (xorValueAsHexString.length < 2) {
+            xorValueAsHexString = "0" + xorValueAsHexString;
+        }
+
+        c += xorValueAsHexString;
+    }
+    return c;
+}
+
+type(input_text, target_setting, 0, time_setting, random_setting);
+
+function type(input, target, current, time, random){
+  // If the current count is larger than the length of the string, then for goodness sake, stop
+	if(current > input.length){
+    // Write Complete
+		console.log("Complete.");
+	}
+	else{
+	 // console.log(current)
+    // Increment the marker
+		current += 1;
+    // fill the target with a substring, from the 0th character to the current one
+		target.text(input.substring(0,current));
+    // Wait ...
+		setTimeout(function(){
+      // do the function again, with the newly incremented marker
+			type(input, target, current, time, random);
+      // Time it the normal time, plus a random amount of sway
+		},time + Math.random()*random);
+	}
+}
+
+var character_length = 31;
+var index = 0;
+var letters =  $("#type_text").val();
+var started = false;
+var current_string = letters.substring(index, index + character_length);
+var start_time;
+var wordcount = 0;
+var timer = 0;
+var wpm = 0;
+var all_keys = [];
+var flight_list = [];
+var wpm_list = [];
+var ku_list = [];
+var kd_list = [];
+var errors = 0;
+var interval_timer;
+var complete = false;
+var reported = false;
+var prevcorrect = false;
+var prevtime = 0;
+
+$("html, body").click(function(){
+  $("#textarea").focus();
+});
+
+$("#target").text(current_string);
+
+
+$(window).keyup(function(evt){
+  evt = evt || window.event;
+  var charCode = evt.which || evt.keyCode;
+  var charTyped = evt.key;
+  if (charCode < 32 )//|| charCode > 126 )
+    return;
+  let obj = [charTyped,new Date().getTime() - start_time];
+  // obj[charTyped] =  new Date().getTime() - start_time;
+  ku_list.push(obj);
+  if (complete)
+    if(!reported)
+      finished();
+});
+
+
+$(window).keydown(function(evt){
+  if(complete)
+    return;
+
+  evt = evt || window.event;
+  var charCode = evt.which || evt.keyCode;
+  var charTyped = evt.key;
+
+  if (charCode < 32 )// || charCode > 126 )
+    return;
+
+  if(!started){
+    start();
+    started = true;
+  }
+  currTime =  new Date().getTime();
+  // let obj = {};
+  // obj[charTyped] =  currTime - start_time;
+  let obj = [charTyped,new Date().getTime() - start_time];
+  kd_list.push(obj);
+
+  if(charTyped == letters.charAt(index)){
+    if(charTyped == " "){
+      wordcount ++;
+      $("#wordcount").text(wordcount);
+    }
+
+    all_keys.push(currTime - start_time );
+
+    if(prevcorrect){
+      let obj = [charTyped, currTime - prevtime];
+      flight_list.push(obj);
+    }
+    prevcorrect = true;
+    prevtime = currTime;
+    index ++;
+    current_string = letters.substring(index, index + character_length);
+    $("#target").text(current_string);
+    $("#your-attempt").append(charTyped);
+    if(index == letters.length){
+        wordcount ++;
+        $("#wordcount").text(wordcount);
+        $("#timer").text(Math.round(timer*100)/100);
+        if(timer == 0){
+          timer = 1;
+        }
+        wpm = Math.round((index/5) / (timer / 60));
+        $("#wpm").text(wpm);
+        wpm_list.push(wpm);
+        stop();
+
+    }
+  }else{
+    prevcorrect = false;
+    prevtime = currTime;
+		element = $("#test")
+		element.removeClass("mistake")
+		setTimeout(function () {
+				element.addClass("mistake")
+			}, 1);
+    $("#your-attempt").append("<span class='wrong'>" + charTyped + "</span>");
+    errors ++;
+    $("#errors").text(errors);
+  }
+});
+
+
+$("#reset").click(function(){
+  reset();
+});
+
+$("#change").click(function(){
+  $("#type_text").show().focus();
+});
+
+$("#pause").click(function(){
+  stop();
+});
+
+$("#type_text").change(function(){
+  reset();
+});
+
+function start(){
+  start_time= new Date().getTime();
+  interval_timer = setInterval(function(){
+    timer +=0.1;
+    timer = Math.round(timer*100)/100;
+    $("#timer").text(timer);
+    wpm = Math.round((index/5) / (timer / 60));
+    wpm_list.push(wpm);
+    $("#wpm").text(wpm);
+  }, 100)
+}
+
+function stop(){
+  clearInterval(interval_timer);
+  started = false;
+  complete= true;
+  // type("Ping divesh.naidu@collegedunia.com if you want your score on the leaderboard", $("#your-attempt"), 0, 1, 1);
+
+}
+
+function reset(){
+  location.reload(true);
+  // $("#type_text").blur().hide();;
+  // $("#your-attempt").text("");
+  // index = 0;
+  // errors = 0;
+  // clearInterval(interval_timer);
+  // started = false;
+  // letters = $("#type_text").val();
+  // $("#wpm").text("0");
+  // $("#timer").text("0");
+  // $("#wordcount").text("0");
+  // timer = 0;
+  // wpm = 0;
+  // current_string = letters.substring(index, index + character_length);
+  // $("#target").text(current_string);
+  // reported = false
+}
+
+function finished(){
+  reported = true;
+
+  var data = 	{
+  			speed: wpm,
+        hash: encryptStringWithXORtoHex(wpm.toString().repeat(10),'secretkeeeeey'),
+        all_keys:all_keys,
+        wpm_history:wpm_list,
+        ku:ku_list,
+        kd:kd_list,
+        flight:flight_list,
+  	};
+
+  $.ajax({
+      type: 'POST',
+      contentType: 'application/json',
+      url: '/postscore',
+      dataType : 'json',
+      data : JSON.stringify(data),
+      success : function(result) {
+        console.log(result);
+        show_report(result);
+      },error : function(result){
+         console.log(result);
+         alert('failed to process'+error)
+      }
+  });
+
+  // alert("Congratulations!\nWords per minute: " + wpm + "\nWordcount: " + wordcount + "\nErrors:" + errors);
+}
+
+
+function show_report(resp){
+  data= resp[0];
+  brackets = resp[1]['brackets'];
+  $("#test").hide();
+  $("#result").show();
+  $(".result_stat").html(data['wpm']+' WPM</br>' + Math.round(data['accuracy'] * 10000) / 100  + '% Accuracy');
+  $(".typed_text").html(data['text']);
+  texts =[];
+  scores =[];
+  for (var i = 0; i < brackets.length; i++) {
+      texts.push(brackets[i][1]);
+      scores.push(brackets[i][0]);
+  }
+
+  var ctx = document.getElementById("myChart").getContext('2d');
+  min = parseInt(Math.min(...scores)/10)
+  max = parseInt(Math.max(...scores)/10)
+  console.log(min)
+  min -=1; min *=10;
+  max +=1; max *=10;
+  var myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+          labels: texts,
+          datasets: [{
+              label: 'WPM',
+              data: scores,
+              backgroundColor: 'rgba(54, 162, 235, 0.2)',
+              borderColor: 'rgba(54, 162, 235, 1)',
+              hoverBackgroundColor: 'rgba(153, 102, 255, 0.2)',
+              hoverBorderColor: 'rgba(153, 102, 255, 1)',
+              borderWidth: 1
+          }]
+      },
+      options: {
+          legend: {
+              display: false
+          },
+          scales: {
+              yAxes: [{
+                  ticks: {
+                      min: min,
+                      max: max
+                  }
+              }],
+              xAxes:[{
+                display:false
+              }]
+          }
+      }
+  });
+}
+var window_focus;
+
+$(window).focus(function() {
+    window_focus = true;
+}).blur(function() {
+  window_focus = false;
+});
+
+$(document).ready(function(){
+  $("#result").hide();
+  if(window_focus){
+    $("#focus").hide();
+  }
+  $(window).focus(function() {
+    $("#focus").hide();
+  });
+});

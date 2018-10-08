@@ -45,7 +45,6 @@ db.scores.update({name:'Raviranjan Singh'}, {$set:{speed:66, achieved_on: new Da
 db.scores.update({name:'Divesh Naidu'}, {$set:{dept:"Tech"}})
 
 
-
 db.texts.insert({text:"I'm just not the guy for you. I mean, you need a guy who's happy and perky all the time. Maybe a guy who's had part of his brain removed and he thinks he's a bunny and you can go off and be bunnies together."})
 db.texts.insert({text:"In the short term, it would make me happy to go play outside. In the long term, it would make me happier to do well at school and become successful. But in the very long term, I know which will make better memories."})
 db.texts.insert({text:"I suggest you change your diet. It could lead to high blood pressure if you fry it. Or even a stroke, heart attack, heart disease."})
@@ -66,3 +65,6 @@ db.texts.insert({text:"I appreciate but can't accept this thank you note that's 
 db.texts.insert({text:"Think of what you're saying, you can get it wrong and still you think that it's alright. Think of what I'm saying, we can work it out and get it straight or say good night."})
 db.texts.insert({text:"We used to look at the stars and confess our dreams, hold each other till the morning light. We used to laugh, now we only fight. Baby, are you lonesome now?"})
 db.texts.insert({text:"She can lead you to love, she can take you or leave you, she can ask for the truth, but she'll never believe. And she'll take what you give her as long as it's free."})
+db.texts.insert({text:"Nida Rahim is a newly produced military officer who is fiercely loyal to the authoritarian regime and does not hesitate to even report her own father for misconduct. She is appointed at a covert military detention centre to interrogate Ali Saeed.", 'source':'Ghoul synopsis', 'credit':'Divyanshu Kalra'})
+
+I'm a great quitter. It's one of the few things I do well. I come from a long line of quitters. My father was a quitter, my grandfather was a quitter... I was raised to give up.

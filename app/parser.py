@@ -1,6 +1,6 @@
 '''Statistical analysis on typing data'''
 import statistics
-
+from . import match
 def process_dwell(data):
     dwell_times = []
     dwell_list= []
@@ -109,7 +109,7 @@ def serialize_kd_ku(kd,ku):
         s_ku += k[0] + str(k[1]) +","
     return s_kd + "||" + s_ku
 
-def process_list(data,text):
+def process_list(data,text,db):
     result = {}
     extra_data = {}
     verbose_data = {}
@@ -166,7 +166,7 @@ def process_list(data,text):
 
     extra_data['brackets'] = wpm_brackets
     extra_data['keys_flight'] = l
-
+    match.matchUsers(db,result)
     return ( True, wpm, result ,extra_data)
 
 # imp params decreasing: overlap,  dwell stddev, dwell, flight,correct covar,

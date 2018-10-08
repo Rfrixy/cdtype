@@ -93,7 +93,7 @@ def create_app(database_uri=None, debug=True):
                 from . import parser
                 text = db.scores.find_one({'email':mailid},{'text':1})
                 db.scores.update({'email':mailid},{'$set':{ 'text': ''}})
-                res = parser.process_list(d,text)
+                res = parser.process_list(d,text,db)
                 assert(res[0])
                 db.scores.update({'email':mailid},{'$push':{ 'history':{ 'speed':speed,'achieved_on': datetime.datetime.now(), 'data':res[2]}}})
 
