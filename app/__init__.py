@@ -82,31 +82,35 @@ def create_app(database_uri=None, debug=True):
     @app.route('/postscore',methods=['POST'])
     def post_score():
         mailid = session.get('user_mail')
-        if (mailid):
-            try:
-            # if 2:
-                d = request.get_json()
-                hash = dataops.decryptStringWithXORFromHex(d['hash'],'secretkeeeeey')
-                speed = int(hash[:len(hash)//10])
-                if speed > 160:
-                    return 'false'
-                from . import parser
-                text = db.scores.find_one({'email':mailid},{'text':1})
-                db.scores.update({'email':mailid},{'$set':{ 'text': ''}})
-                res = parser.process_list(d,text,db)
-                assert(res[0])
-                db.scores.update({'email':mailid},{'$push':{ 'history':{ 'speed':speed,'achieved_on': datetime.datetime.now(), 'data':res[2]}}})
-
-                if not res[2]['bot']:
-                    check_and_update_speed(mailid,res[1])
-                    return jsonify(res[2],res[3])
-                else:
-                    return 'false'
-            except Exception as e:
-                print(e)
-                import traceback
-                traceback.print_exc()
+        try:
+        # if 2:
+            d = request.get_json()
+            hash = dataops.decryptStringWithXORFromHex(d['hash'],'secretkeeeeey')
+            speed = int(hash[:len(hash)//10])
+            if speed > 160:
                 return 'false'
+            from . import parser
+
+            text = {'text':d['letters']}
+            if(mailid):
+                text = db.scores.find_one({'email':mailid},{'text':1})
+            print(text)
+            res = parser.process_list(d,text,db)
+            if(mailid and res[0]):
+                db.scores.update({'email':mailid},{'$set':{ 'text': ''}})
+                # db.scores.update({'email':mailid},{'$push':{ 'history':{ 'speed':speed,'achieved_on': datetime.datetime.now(), 'data':res[2]}}})
+                db.tests.insert({'email':mailid,'speed':speed,'achieved_on': datetime.datetime.now(), 'data':res[2] })
+
+            if not res[2]['bot'] and mailid:
+                check_and_update_speed(mailid,res[1])
+                return jsonify(res[2],res[3])   
+            else:
+                return jsonify(res[2],res[3],'DETECTED BOT OR NOT LOGGED IN')
+        except Exception as e:
+            print(e)
+            import traceback
+            traceback.print_exc()
+            return 'false'
         return 'false'
 
     @app.route('/statistics')

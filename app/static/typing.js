@@ -236,6 +236,7 @@ function finished(){
         ku:ku_list,
         kd:kd_list,
         flight:flight_list,
+        letters:letters,
   	};
 
   $.ajax({
